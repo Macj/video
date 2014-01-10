@@ -1,12 +1,19 @@
 %h1 Список видео
 
+%p
+  = link_to "Добавить видео", new_video_file_path
+
 - if @video_files.count > 0
   %table
-    %tr
-      %th Название
-
     - @video_files.each do |file|
       %tr
         %td= link_to file.title, video_file_path(file)
+        - if file.code
+          - if file.youtube
+            %td
+              %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{file.code}", :frameborder => "0", :allowfullscreen => true}
+          - elsif file.vimeo
+            %td
+              %iframe{:src => "//player.vimeo.com/video/#{file.code}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
 - else
   %p На данный момент объектов нет.
