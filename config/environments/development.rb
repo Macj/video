@@ -26,4 +26,12 @@ Video::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # GOOGLE_KEY = "219652618621.apps.googleusercontent.com"
+  # GOOGLE_SECRET = "XQCC45V3uPB00u7Ek9d1W4pO"
+
+  ENV['GOOGLE_KEY'] = "219652618621.apps.googleusercontent.com";
+  ENV['GOOGLE_SECRET'] = "XQCC45V3uPB00u7Ek9d1W4pO";
+  ENV['FACEBOOK_APP_ID'] = "277140879104534"
+  ENV['FACEBOOK_SECRET'] = "7041159d5daaf89e93e8e32e8c39441e"
 end
