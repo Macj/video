@@ -1,0 +1,12 @@
+%h1 Список видео
+
+- if @video_files.count > 0
+  %table
+    %tr
+      %th Название
+
+    - @video_files.each do |file|
+      %tr
+        %td= link_to file.title, video_file_path(file)
+- else
+  %p На данный момент объектов нет.

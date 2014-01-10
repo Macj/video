@@ -1,0 +1,14 @@
+%p
+  %strong
+    Название:
+  = @video_file.title
+
+%p
+  %strong
+    Описание:
+  = @video_file.description
+
+%p
+  %strong
+    Ссылка:
+  = link_to @video_file.url, @video_file.url
