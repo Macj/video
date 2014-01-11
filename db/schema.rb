@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110123047) do
+ActiveRecord::Schema.define(version: 20140110203937) do
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -32,5 +32,14 @@ ActiveRecord::Schema.define(version: 20140110123047) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "video_files", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "code"
+  end
 
 end
