@@ -2,12 +2,13 @@
   %strong
     Название:
   = @video_file.title
-- if @video_file.youtube
-  %p
-    %iframe{:width => "500", :height => "281", :src => "//www.youtube.com/embed/#{@video_file.code}", :frameborder => "0", :allowfullscreen => true}
-- elsif @video_file.vimeo
-  %p
-    %iframe{:src => "//player.vimeo.com/video/#{file.code}", :width => "500", :height => "281", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+- if @video_file.code
+  - if @video_file.youtube
+    %p
+      %iframe{:width => "500", :height => "281", :src => "//www.youtube.com/embed/#{@video_file.code}", :frameborder => "0", :allowfullscreen => true}
+  - elsif @video_file.vimeo
+    %p
+      %iframe{:src => "//player.vimeo.com/video/#{file.code}", :width => "500", :height => "281", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
 
 %p
   %strong
@@ -18,6 +19,9 @@
   %strong
     Ссылка:
   = link_to @video_file.url, @video_file.url
+
+%p
+  = link_to "Редактировать", edit_video_file_path(@video_file)
 
 %p
   = link_to "Остальные видео", video_files_path

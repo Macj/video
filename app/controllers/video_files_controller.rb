@@ -5,6 +5,15 @@ class VideoFilesController < ApplicationController
     @video_files = VideoFile.all
   end
 
+  def search
+    @title = params[:title]
+    if @title and @title != ""
+      @video_files = VideoFile.search_by_title @title
+    else
+      @video_files = VideoFile.all
+    end
+  end
+
   def new
     @video_file = VideoFile.new
   end
@@ -21,10 +30,16 @@ class VideoFilesController < ApplicationController
     end
   end
 
+  def edit
+    data = VideoParser.parse_video_params(@video_file.url)
+    @title = data[:title]
+    @description = data[:description]
+  end
+
   def update
     if @video_file.update_attributes(video_file_params_edited)
       flash[:notice] = "Видео успешно сохранено."
-      redirect_to video_files_path
+      redirect_to video_file_path(@video_file)
     else
       flash[:error] = "Видео не было сохранено. Попробуйте ещё раз."
       render :edit
@@ -41,6 +56,6 @@ class VideoFilesController < ApplicationController
     end
 
     def video_file_params_edited
-      params.require(:video_file).permit(:title, :description)
+      params.require(:video_file).permit(:title, :description, :code)
     end
 end

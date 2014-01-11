@@ -3,6 +3,9 @@
 %p
   = link_to "Добавить видео", new_video_file_path
 
+%p
+  = link_to "Поиск", search_video_files_path
+
 - if @video_files.count > 0
   %table
     - @video_files.each do |file|

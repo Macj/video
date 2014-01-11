@@ -4,7 +4,10 @@ Video::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :video_files
+  resources :video_files do
+    match 'search', :on => :collection, :via => [:get]
+  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
