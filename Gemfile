@@ -34,6 +34,7 @@ end
 
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 gem 'devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
