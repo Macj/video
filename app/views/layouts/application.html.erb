@@ -8,6 +8,36 @@
 </head>
 <body>
 
+<h1>
+  player.pm
+</h1>
+
+
+<% if user_signed_in? %>
+  <p>
+    <%= link_to('Sign out', destroy_user_session_path, :method => :delete) %>
+  <p>
+<% else %>
+  <p>
+   <%= link_to('Sign in with Google', "/auth/google_oauth2", id: "sign_in") %>
+  </p>
+
+  <p>
+    <%= link_to('Sign in with Facebook', "/auth/facebook", id: "sign_in") %>
+  </p>
+
+  <p>
+    <%= link_to('Sign in with vkontakte', "/auth/vkontakte", id: "sign_in") %>
+  <p>
+<% end %>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+  <p class="error"><%= flash[:error] %></p>
+<% end %>
+
 <%= yield %>
 
 </body>

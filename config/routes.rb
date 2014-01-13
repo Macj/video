@@ -1,6 +1,6 @@
 Video::Application.routes.draw do
 
-  root :to => 'frontend#index'
+  root :to => 'video_files#index'
   devise_for :users
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
@@ -10,10 +10,7 @@ Video::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resources :video_files do
-    match 'search', :on => :collection, :via => [:get]
-  end
-
+  resources :video_files
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -2,13 +2,9 @@ class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
 
   def index
-    @video_files = VideoFile.all
-  end
-
-  def search
-    @title = params[:title]
-    if @title and @title != ""
-      @video_files = VideoFile.search_by_title @title
+    @query = params[:query]
+    if @query and @query != ""
+      @video_files = VideoFile.search_query @query
     else
       @video_files = VideoFile.all
     end
@@ -31,9 +27,14 @@ class VideoFilesController < ApplicationController
   end
 
   def edit
-    data = VideoParser.parse_video_params(@video_file.url)
+    data = VideoParser.parse_video_params(@video_file.url, session[:vk_token])
     @title = data[:title]
     @description = data[:description]
+    @video_file.update_attributes(:title => @title, :description => @description)
+    if @video_file.vk?
+      @player = data[:player]
+      @video_file.update_attributes(:title => @title, :description => @description, :player => @player)
+    end
   end
 
   def update
@@ -56,6 +57,6 @@ class VideoFilesController < ApplicationController
     end
 
     def video_file_params_edited
-      params.require(:video_file).permit(:title, :description, :code)
+      params.require(:video_file).permit(:title, :description, :player)
     end
 end

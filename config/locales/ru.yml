@@ -1,0 +1,12 @@
+ru:
+  devise:
+    failure:
+      already_authenticated: "Вы уже вошли в систему"
+      unauthenticated: "Неправильный логин или пароль"
+      invalid: "Неправильный логин или пароль"
+      timeout: "Ваш сеанс закончился. Пожалуйста, войдите в систему снова."
+    sessions:
+      signed_in: "Вы вошли."
+      signed_out: "Вы вышли."
+    registrations:
+       signed_up: "Поздравляем! Вы зарегистрировались в системе."

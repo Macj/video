@@ -2,13 +2,16 @@
   %strong
     Название:
   = @video_file.title
-- if @video_file.code
+- if @video_file.player
   - if @video_file.youtube
     %p
-      %iframe{:width => "500", :height => "281", :src => "//www.youtube.com/embed/#{@video_file.code}", :frameborder => "0", :allowfullscreen => true}
+      %iframe{:width => "500", :height => "281", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
   - elsif @video_file.vimeo
     %p
-      %iframe{:src => "//player.vimeo.com/video/#{file.code}", :width => "500", :height => "281", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+      %iframe{:src => "//player.vimeo.com/video/#{@file.player}", :width => "500", :height => "281", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+  - elsif @video_file.vk?
+    %p
+      %iframe{:src => "#{@video_file.player}", :width => "500", :height => "281", :frameborder => "0"}
 
 %p
   %strong
