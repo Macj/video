@@ -11,25 +11,11 @@
 <h1>
   player.pm
 </h1>
-
-
-<% if user_signed_in? %>
-  <p>
-    <%= link_to('Sign out', destroy_user_session_path, :method => :delete) %>
-  <p>
-<% else %>
-  <p>
-   <%= link_to('Sign in with Google', "/auth/google_oauth2", id: "sign_in") %>
-  </p>
-
-  <p>
-    <%= link_to('Sign in with Facebook', "/auth/facebook", id: "sign_in") %>
-  </p>
-
-  <p>
-    <%= link_to('Sign in with vkontakte', "/auth/vkontakte", id: "sign_in") %>
-  <p>
-<% end %>
+<div>
+  <%- if user_signed_in?%>
+    <%= link_to 'Мои видео', my_videos_path %>
+  <% end%>
+</div>
 
 <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>

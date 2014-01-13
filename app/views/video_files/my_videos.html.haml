@@ -1,0 +1,22 @@
+- if @video_files.count > 0
+  %table
+    - @video_files.each do |file|
+      %tr
+        %td
+          = link_to file.title, video_file_path(file)
+        - if file.player
+          - if file.youtube
+            %td
+              %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{file.player}", :frameborder => "0", :allowfullscreen => true}
+          - elsif file.vimeo
+            %td
+              %iframe{:src => "//player.vimeo.com/video/#{file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+          - elsif file.vk?
+            %td
+              %iframe{:src => "#{file.player}", :width => "300", :height => "169", :frameborder => "0"}
+        %td
+          %p
+            = link_to "Редактировать", edit_video_file_path(file)
+        
+- else
+  %p На данный момент объектов нет.

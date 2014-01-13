@@ -5,6 +5,8 @@ class VideoFile < ActiveRecord::Base
   scope :search_by_title, lambda { |title| where('title LIKE ?', "%#{title}") }
   scope :search_by_query, lambda { |query| where(query) }
   # scope :search_by_title, ->(title, description) { where('title LIKE ? OR description LIKE ?', "%#{title}%", "%#{description}")}
+  belongs_to :user
+
 
   def youtube
     self.url.match(/youtube/) and self.url.match(/watch/)

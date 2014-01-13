@@ -4,7 +4,8 @@ Video::Application.routes.draw do
   devise_for :users
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
-
+  match 'sign_in', to: 'sessions#sign_in_page', via: [:get], :as => :sign_in
+  match 'my_videos', to: 'video_files#my_videos', via: [:get], :as => :my_videos
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

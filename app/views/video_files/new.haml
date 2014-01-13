@@ -1,6 +1,13 @@
-= form_for(@video_file) do |f|
-  .field
-    = f.label :url
-    = f.text_area :url
-  .actions
-    = f.submit "Загрузить"
+- if user_signed_in?
+  = form_for(@video_file) do |f|
+    = f.hidden_field :user_id, :value => current_user.id
+    .field
+      = f.label :url
+      = f.text_area :url
+    .actions
+      = f.submit "Загрузить"
+- else
+  Добавить видео может только авторизованный пользователь.
+  %br
+  = link_to 'Авторизуйтесь', sign_in_path()
+  через любой сервис.

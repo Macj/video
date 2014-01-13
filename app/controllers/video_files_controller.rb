@@ -10,6 +10,11 @@ class VideoFilesController < ApplicationController
     end
   end
 
+  def my_videos
+    puts current_user.inspect
+    @video_files = VideoFile.where(:user_id => current_user.id)
+  end
+
   def new
     @video_file = VideoFile.new
   end
@@ -53,7 +58,7 @@ class VideoFilesController < ApplicationController
     end
 
     def video_file_params
-      params.require(:video_file).permit(:url)
+      params.require(:video_file).permit(:url, :user_id)
     end
 
     def video_file_params_edited
