@@ -24,7 +24,8 @@
   = link_to @video_file.url, @video_file.url
 
 %p
-  = link_to "Редактировать", edit_video_file_path(@video_file)
+  - if @video_file.user_id == current_user.id
+    = link_to "Редактировать", edit_video_file_path(@video_file)
 
 %p
   = link_to "Остальные видео", video_files_path
