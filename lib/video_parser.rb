@@ -7,12 +7,15 @@ require 'net/https'
 
 module VideoParser
   def self.parse_video_params url, token
-    doc = Nokogiri::HTML(open(url))
     if url.match(/youtube/)
+      doc = Nokogiri::HTML(open(url))
+      doc.encoding = 'utf-8'
       title = doc.at_css('h1 span').content.gsub(/\s/, "")
       description = doc.at_xpath("//p[@id='eow-description']").content
       data = { :title => title, :description => description }
     elsif url.match(/vimeo/)
+      doc = Nokogiri::HTML(open(url))
+      doc.encoding = 'utf-8'
       title = doc.at_css('h1').content
       if doc.at_css('div.description.read_more.collapsed')
         description = doc.at_css('div.description.read_more.collapsed > p.first').content
@@ -40,7 +43,6 @@ module VideoParser
       description = @data["description"].to_s
       player = @data["player"].to_s
       data = { :title => title, :description => description, :player => player }
-    elsif url.match(/fb/)
     end
   end
 end
