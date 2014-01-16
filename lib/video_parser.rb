@@ -48,7 +48,7 @@ module VideoParser
 
       ####### for getting direct link to the different sources from vk
       if player.match(/youtube/)
-        ViddlRb.get_urls(player)
+        direct_link = ViddlRb.get_urls(player)
       elsif player.match(/vk/)
         doc = Nokogiri::HTML(open(player))
         doc.encoding = 'utf-8'
@@ -58,11 +58,12 @@ module VideoParser
         doc = Nokogiri::HTML(open(player))
         doc.encoding = 'utf-8'
         puts doc
+        direct_link = doc
       end
       # puts "DATA", @data
       data = { :title => title, :description => description, :player => player }
     end
   end
 
-  #parse_video_params("https://vk.com/video208400051_165603436", "3e1d912e0d9663af90967aff2094d1f585fc663170685ec6fd8faa67f5a55cb267c60ea7e0e7975de9d76")
+
 end

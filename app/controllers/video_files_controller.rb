@@ -12,7 +12,6 @@ class VideoFilesController < ApplicationController
   end
 
   def my_videos
-    puts current_user.inspect
     @video_files = VideoFile.where(:user_id => current_user.id)
   end
 
