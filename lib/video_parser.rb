@@ -5,7 +5,6 @@ require 'openssl'
 require 'net/http'
 require 'net/https'
 require 'active_support/all'
-require 'viddl-rb'
 
 module VideoParser
   def self.parse_video_params url, token
@@ -29,7 +28,7 @@ module VideoParser
     elsif url.match(/vk/)
       #for videos from communities
       if url.match(/videos/)
-        video_code = url.sub(/.*videos/, '')
+        video_code = url[/z=video(.*?)%/,1]
       else
         video_code = url.slice(/([\d|_]*)$/)
       end
@@ -54,6 +53,7 @@ module VideoParser
         doc.encoding = 'utf-8'
         elem = doc.xpath('//param[@name="flashvars"]').attribute("value").to_s
         direct_link = elem[/url240=(.*?)&/,1]
+        puts direct_link
       elsif player.match(/vimeo/)
         doc = Nokogiri::HTML(open(player))
         doc.encoding = 'utf-8'
@@ -64,6 +64,5 @@ module VideoParser
       data = { :title => title, :description => description, :player => player }
     end
   end
-
 
 end
