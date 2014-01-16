@@ -4,6 +4,8 @@ require 'open-uri'
 require 'openssl'
 require 'net/http'
 require 'net/https'
+require 'active_support/all'
+require 'viddl-rb'
 
 module VideoParser
   def self.parse_video_params url, token
@@ -26,8 +28,8 @@ module VideoParser
       data = { :title => title, :description => description }
     elsif url.match(/vk/)
       #for videos from communities
-      if url.match(/z=/)
-        video_code = url[/.*z=video([^%2F]*)/,1]
+      if url.match(/videos/)
+        video_code = url.sub(/.*videos/, '')
       else
         video_code = url.slice(/([\d|_]*)$/)
       end
@@ -42,7 +44,25 @@ module VideoParser
       title = @data["title"].to_s
       description = @data["description"].to_s
       player = @data["player"].to_s
+      puts player
+
+      ####### for getting direct link to the different sources from vk
+      if player.match(/youtube/)
+        ViddlRb.get_urls(player)
+      elsif player.match(/vk/)
+        doc = Nokogiri::HTML(open(player))
+        doc.encoding = 'utf-8'
+        elem = doc.xpath('//param[@name="flashvars"]').attribute("value").to_s
+        direct_link = elem[/url240=(.*?)&/,1]
+      elsif player.match(/vimeo/)
+        doc = Nokogiri::HTML(open(player))
+        doc.encoding = 'utf-8'
+        puts doc
+      end
+      # puts "DATA", @data
       data = { :title => title, :description => description, :player => player }
     end
   end
+
+  #parse_video_params("https://vk.com/video208400051_165603436", "3e1d912e0d9663af90967aff2094d1f585fc663170685ec6fd8faa67f5a55cb267c60ea7e0e7975de9d76")
 end
