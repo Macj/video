@@ -2,7 +2,8 @@
   %strong
     Название:
   = @video_file.title
-- if @video_file.player
+  #playerLh7786aL
+-# if @video_file.player
   - if @video_file.youtube
     %p
       %iframe{:width => "500", :height => "281", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
@@ -29,3 +30,6 @@
 
 %p
   = link_to "Остальные видео", video_files_path
+
+  %script{:type=>'text/javascript'}
+    = "jwplayer('playerLh7786aL').setup({ file: '#{@hostname + @video_file.local_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe

@@ -1,5 +1,6 @@
 class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
+  before_action :get_host, :only => :show
 
   def index
     @query = params[:query]
@@ -63,5 +64,9 @@ class VideoFilesController < ApplicationController
 
     def video_file_params_edited
       params.require(:video_file).permit(:title, :description, :player)
+    end
+
+    def get_host
+      @hostname = request.protocol + [request.host, request.port].join(':')
     end
 end
