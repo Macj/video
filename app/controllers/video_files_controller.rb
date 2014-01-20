@@ -7,7 +7,7 @@ class VideoFilesController < ApplicationController
     if @query and @query != ""
       @video_files = VideoFile.search_query @query
     else
-      @video_files = VideoFile.all
+      @video_files = VideoFile.order('created_at DESC').limit(20).all
     end
   end
 
@@ -35,7 +35,8 @@ class VideoFilesController < ApplicationController
     data = VideoParser.parse_video_params(@video_file.url, session[:vk_token])
     @title = data[:title]
     @description = data[:description]
-    @video_file.update_attributes(:title => @title, :description => @description)
+    @link = data[:link]
+    @video_file.update_attributes(:title => @title, :description => @description, :src_url => @link)
     if @video_file.vk?
       @player = data[:player]
       @video_file.update_attributes(:title => @title, :description => @description, :player => @player)
@@ -67,5 +68,6 @@ class VideoFilesController < ApplicationController
 
     def get_host
       @hostname = request.protocol + [request.host, request.port].join(':')
+      puts "HOST", @hostname
     end
 end

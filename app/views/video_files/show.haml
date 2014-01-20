@@ -32,4 +32,4 @@
   = link_to "Остальные видео", video_files_path
 
   %script{:type=>'text/javascript'}
-    = "jwplayer('playerLh7786aL').setup({ file: '#{@hostname + @video_file.local_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+    = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.src_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
