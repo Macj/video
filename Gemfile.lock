@@ -112,6 +112,7 @@ GEM
       multi_json
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
+    open_uri_redirections (0.1.4)
     orm_adapter (0.5.0)
     polyglot (0.3.3)
     progressbar (0.21.0)
@@ -195,6 +196,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-vkontakte
+  open_uri_redirections
   rails (= 4.0.1)
   sass-rails (~> 4.0.0)
   sdoc

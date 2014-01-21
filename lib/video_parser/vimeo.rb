@@ -10,7 +10,7 @@ module VideoParser
       else
         description = doc.at_css('div.description > p.first').content
       end
-      url = url.insert(7, 'player.').insert(24, 'video/')
+      url = url.insert(8, 'player.').insert(25, 'video/')
       direct_link = get_vimeo_link(url)
       data = { :title => title, :description => description, :link => direct_link }
     end
@@ -21,7 +21,6 @@ module VideoParser
       if script.match(/\"allow_hd\":1/)
         hd = script.scan(/\"hd\":{(.*)}/).to_s
         direct_link = hd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
-        puts direct_link
       elsif script.match(/\"allow_hd\":0/)
         sd = script.scan(/\"sd\":{(.*)}/).to_s
         direct_link = sd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
