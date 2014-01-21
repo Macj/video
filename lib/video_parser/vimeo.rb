@@ -18,15 +18,18 @@ module VideoParser
     def self.get_vimeo_link url
       doc = NokogiriParser.get_doc(url)
       script = doc.at('script').text.to_s
-      if script.match(/\"allow_hd\":1/)
+      if script.match(/\"allow_hd\":1/) and script.match(/\"hd\":1/)
         hd = script.scan(/\"hd\":{(.*)}/).to_s
         direct_link = hd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
       elsif script.match(/\"allow_hd\":0/)
         sd = script.scan(/\"sd\":{(.*)}/).to_s
         direct_link = sd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
+      else
+        sd = script.scan(/\"sd\":{(.*)}/).to_s
+        direct_link = sd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
       end
 
-      direct_link
+      return direct_link
     end
   end
 end

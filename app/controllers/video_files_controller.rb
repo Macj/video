@@ -2,7 +2,7 @@ require 'video_parser/vimeo'
 
 class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
-  before_action :update_vimeo_link, only: [:show, :edit]
+  before_action :update_vimeo_link, only: [:show]
   before_action :autorize_user, only: [:my_videos, :create, :edit]
 
   def index
@@ -64,10 +64,9 @@ class VideoFilesController < ApplicationController
         data = VideoParser::Vimeo.get_content(file.url)
         @link = data[:link]
         file.update_attributes(:src_url => @link)
-        puts "FILE URL", file.src_url
-      elsif file.url.match(/vimeo/)
-        @link = VideoParser::Vimeo.get_vimeo_link(@video_file.player)
-        @video_file.update_attributes(:src_url => @link)
+      elsif file.player.match(/vimeo/)
+        @link = VideoParser::Vimeo.get_vimeo_link(file.player)
+        file.update_attributes(:src_url => @link)
       end
     end
     return video_files
@@ -91,7 +90,7 @@ class VideoFilesController < ApplicationController
         data = VideoParser::Vimeo.get_content(@video_file.url)
         @link = data[:link]
         @video_file.update_attributes(:src_url => @link)
-      elsif @video_file.url.match(/vimeo/)
+      elsif @video_file.player.match(/vimeo/)
         @link = VideoParser::Vimeo.get_vimeo_link(@video_file.player)
         @video_file.update_attributes(:src_url => @link)
       end
