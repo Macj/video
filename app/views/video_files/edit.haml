@@ -14,4 +14,4 @@
     = f.submit "Сохранить"
 
   %script{:type=>'text/javascript'}
-    = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.src_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+    = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe

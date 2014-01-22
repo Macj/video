@@ -1,4 +1,4 @@
-require 'nokogiri_parser'
+require 'video_parser/nokogiri_parser'
 require 'openssl'
 require 'net/http'
 require 'net/https'
@@ -23,16 +23,19 @@ module VideoParser
       title = @data["title"].to_s
       description = @data["description"].to_s
       player = @data["player"].to_s
+      image_url = @data["image_medium"]
 
       if player.match(/youtube/)
         direct_link = youtube_link(player)
       elsif player.match(/vimeo/)
-        direct_link = vimeo_link(player)
+        data = vimeo_link(player)
+        direct_link = data[:direct_link]
+        image_url = data[:image_url]
       elsif player.match(/vk/)
         direct_link = vk_link(player)
       end
 
-      data = { :title => title, :description => description, :player => player, :link => direct_link}
+      data = { :title => title, :description => description, :player => player, :link => direct_link, :image_url => image_url }
     end
 
     def self.youtube_link player

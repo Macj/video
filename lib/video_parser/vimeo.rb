@@ -1,4 +1,4 @@
-require 'nokogiri_parser'
+require 'video_parser/nokogiri_parser'
 
 module VideoParser
   class Vimeo
@@ -11,8 +11,10 @@ module VideoParser
         description = doc.at_css('div.description > p.first').content
       end
       url = url.insert(8, 'player.').insert(25, 'video/')
-      direct_link = get_vimeo_link(url)
-      data = { :title => title, :description => description, :link => direct_link }
+      data = get_vimeo_link(url)
+      direct_link = data[:direct_link]
+      image_url = data[:image_url]
+      data = { :title => title, :description => description, :player => url, :link => direct_link, :image_url => image_url }
     end
 
     def self.get_vimeo_link url
@@ -29,7 +31,12 @@ module VideoParser
         direct_link = sd[/\\\"url\\\":\\\"(.*?)\\\",/,1]
       end
 
-      return direct_link
+      if script.match(/\"1280\"/)
+        hash = script.scan(/\"thumbs\":{(.*)}/).to_s
+        image_url = hash[/\\\"1280\\\":\\\"(.*?)\\\",/,1]
+      end
+
+      data = { :direct_link => direct_link, :image_url => image_url}
     end
   end
 end

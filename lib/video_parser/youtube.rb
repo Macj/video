@@ -1,4 +1,4 @@
-require 'nokogiri_parser'
+require 'video_parser/nokogiri_parser'
 
 module VideoParser
   class Youtube

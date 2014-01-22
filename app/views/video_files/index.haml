@@ -13,10 +13,10 @@
   %ul
     - @video_files.each do |file|
       %li= link_to file.title, video_file_path(file)
-      - if file.player
+      - if file.video_url
         - id = "playerLh7786aL_" + "#{file.id}"
         .div{:id => "playerLh7786aL_" + "#{file.id}"}
           %script{:type=>'text/javascript'}
-            = "jwplayer('#{id}').setup({ file: '#{file.src_url}', width: '25%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+            = "jwplayer('#{id}').setup({ file: '#{file.video_url}', image: '#{file.image_url}', width: '25%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
 - else
   %p На данный момент объектов нет.

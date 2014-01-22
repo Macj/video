@@ -1,4 +1,5 @@
 require 'video_parser/vimeo'
+require 'video_parser'
 
 class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
@@ -10,13 +11,13 @@ class VideoFilesController < ApplicationController
     if @query and @query != ""
       @video_files = VideoFile.search_query @query
     else
-      @video_files = VideoFile.order('created_at DESC').limit(20).all
+      @video_files = VideoFile.order('created_at DESC').limit(20)
       update_vimeo_links @video_files
     end
   end
 
   def my_videos
-    @video_files = VideoFile.where(:user_id => current_user.id)
+    @video_files = VideoFile.where(:user_id => current_user.id).limit(20)
     update_vimeo_links @video_files
   end
 
@@ -41,10 +42,12 @@ class VideoFilesController < ApplicationController
     @title = data[:title]
     @description = data[:description]
     @link = data[:link]
-    @video_file.update_attributes(:title => @title, :description => @description, :src_url => @link)
-    if @video_file.vk?
-      @player = data[:player]
-      @video_file.update_attributes(:title => @title, :description => @description, :player => @player)
+    @image = data[:image_url]
+    @player = data[:player]
+    if @video_file.vk? or @video_file.vimeo? or @video_file.vk_and_vimeo?
+      @video_file.update_attributes(:title => @title, :description => @description, :player => @player, :image_url => @image, :video_url => @link)
+    else
+      @video_file.update_attributes(:title => @title, :description => @description, :video_url => @link)
     end
   end
 
@@ -59,16 +62,14 @@ class VideoFilesController < ApplicationController
   end
 
   def update_vimeo_links video_files
-    video_files.select{|f| f.url.include?('vimeo')}.each do |file|
-      if file.url.match(/vimeo.com/)
-        data = VideoParser::Vimeo.get_content(file.url)
-        @link = data[:link]
-        file.update_attributes(:src_url => @link)
-      elsif file.player.match(/vimeo/)
-        @link = VideoParser::Vimeo.get_vimeo_link(file.player)
-        file.update_attributes(:src_url => @link)
+    video_files.where("url LIKE '%vimeo%'").each do |file|
+      if file.player and file.player.match(/vimeo/)
+        data = VideoParser::Vimeo.get_vimeo_link(file.player)
+        @link = data[:direct_link]
+        file.update_attribute(:video_url, @link)
       end
     end
+
     return video_files
   end
 
@@ -86,13 +87,10 @@ class VideoFilesController < ApplicationController
     end
 
     def update_vimeo_link
-      if @video_file.url.match(/vimeo.com/)
-        data = VideoParser::Vimeo.get_content(@video_file.url)
-        @link = data[:link]
-        @video_file.update_attributes(:src_url => @link)
-      elsif @video_file.player.match(/vimeo/)
-        @link = VideoParser::Vimeo.get_vimeo_link(@video_file.player)
-        @video_file.update_attributes(:src_url => @link)
+      if @video_file.player and @video_file.player.match(/vimeo/)
+        data = VideoParser::Vimeo.get_vimeo_link(@video_file.player)
+        @link = data[:direct_link]
+        @video_file.update_attributes(:video_url => @link)
       end
     end
 
