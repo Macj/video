@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'haml'
 gem 'nokogiri', '~> 1.5.0'
 gem 'open_uri_redirections'
+gem 'kaminari'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

@@ -11,7 +11,7 @@ class VideoFilesController < ApplicationController
     if @query and @query != ""
       @video_files = VideoFile.search_query @query
     else
-      @video_files = VideoFile.order('created_at DESC').limit(20)
+      @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(5)
       update_vimeo_links @video_files
     end
   end
@@ -62,7 +62,7 @@ class VideoFilesController < ApplicationController
   end
 
   def update_vimeo_links video_files
-    video_files.where("url LIKE '%vimeo%'").each do |file|
+    video_files.where("player LIKE '%vimeo%'").each do |file|
       if file.player and file.player.match(/vimeo/)
         data = VideoParser::Vimeo.get_vimeo_link(file.player)
         @link = data[:direct_link]

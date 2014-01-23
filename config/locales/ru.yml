@@ -10,3 +10,10 @@ ru:
       signed_out: "Вы вышли."
     registrations:
        signed_up: "Поздравляем! Вы зарегистрировались в системе."
+  views:
+    pagination:
+      previous: "&lt; Предыдущая"
+      next: "Следующая &gt;"
+      truncate: "..."
+      last: "В конец"
+      first: "В начало"

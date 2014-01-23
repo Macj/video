@@ -8,6 +8,7 @@
     = submit_tag "Поиск"
 
 - if @video_files.count > 0
+  %p= paginate @video_files
   - if @query
     %h3 Результаты поиска
   %ul
