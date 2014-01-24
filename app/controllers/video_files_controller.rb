@@ -10,6 +10,9 @@ class VideoFilesController < ApplicationController
     @query = params[:query]
     if @query and @query != ""
       @video_files = VideoFile.search_query @query
+    elsif @query and @query == ""
+      flash[:error] = "Введите запрос."
+      redirect_to root_path
     else
       @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(5)
       update_vimeo_links @video_files
@@ -28,7 +31,10 @@ class VideoFilesController < ApplicationController
   def create
     @video_file = VideoFile.new(video_file_params)
 
-    if @video_file.save
+    if @video_file.url.match(/vk/) and current_user.provider != "vkontakte"
+      flash[:error] = "Вы должны авторизоваться Вконтакте."
+      redirect_to sign_in_path
+    elsif @video_file.save
       flash[:notice] = "Видео успешно загрузилось."
       redirect_to edit_video_file_path(@video_file)
     else
