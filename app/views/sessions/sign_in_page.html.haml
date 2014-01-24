@@ -1,7 +1,7 @@
-%p
-  = link_to('Sign in with Google', "/auth/google_oauth2", id: "sign_in")
-%p
-  = link_to('Sign in with Facebook', "/auth/facebook", id: "sign_in")
+%p Войти с помощью:
 
-%p
-  = link_to('Sign in with vkontakte', "/auth/vkontakte", id: "sign_in")
+%table
+  %tr
+    %th= link_to image_tag("facebook.png"), "/auth/facebook", id: "sign_in"
+    %th= link_to image_tag("vk_2.png"), "/auth/vkontakte", id: "sign_in"
+    %th= link_to image_tag("google_plus.png"), "/auth/google_oauth2", id: "sign_in"
