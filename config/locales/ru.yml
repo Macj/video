@@ -12,8 +12,8 @@ ru:
        signed_up: "Поздравляем! Вы зарегистрировались в системе."
   views:
     pagination:
-      previous: "&lt; Предыдущая"
-      next: "Следующая &gt;"
+      previous: "&lt;&lt;&lt; Предыдущая страница"
+      next: "Следующая страница &gt;&gt;&gt;"
       truncate: "..."
       last: "В конец"
       first: "В начало"

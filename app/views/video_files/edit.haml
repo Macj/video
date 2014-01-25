@@ -1,17 +1,19 @@
-= form_for(@video_file) do |f|
-  .field
-    = f.label :title
-    = f.text_field :title, :value => @title
-  .field
-    = f.label :description
-    = f.text_area :description, :value => @description
+.container
+  = form_for(@video_file) do |f|
+    %fieldset
+      .field
+        = f.label :title
+        = f.text_field :title, :value => @title
+      .field
+        = f.label :description
+        = f.text_area :description, :value => @description
 
-  .p
-    Preview
-  #playerLh7786aL
+      .p
+        Preview
+      #playerLh7786aL
 
-  .actions
-    = f.submit "Сохранить"
+      .actions
+        = f.submit "Сохранить"
 
-  %script{:type=>'text/javascript'}
-    = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+      %script{:type=>'text/javascript'}
+        = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe

@@ -9,7 +9,7 @@ class VideoFilesController < ApplicationController
   def index
     @query = params[:query]
     if @query and @query != ""
-      @video_files = VideoFile.search_query @query
+      @video_files = VideoFile.search_query(@query).order('created_at DESC').page(params[:page])
     elsif @query and @query == ""
       flash[:error] = "Введите запрос."
       redirect_to root_path
@@ -31,7 +31,9 @@ class VideoFilesController < ApplicationController
   def create
     @video_file = VideoFile.new(video_file_params)
 
-    if @video_file.url.match(/vk/) and current_user.provider != "vkontakte"
+    if @video_file.url.match(/vimeo.com/) and !@video_file.url.include?('https')
+      @video_file.url = @video_file.url.insert(4, 's')
+    elsif @video_file.url.match(/vk/) and current_user.provider != "vkontakte"
       flash[:error] = "Вы должны авторизоваться Вконтакте."
       redirect_to sign_in_path
     elsif @video_file.save

@@ -1,23 +1,27 @@
-%p
-  = link_to "Добавить видео", new_video_file_path
-
-= form_tag video_files_path, :method => 'get' do
-  %p
-    = search_field_tag :query
-  %p
-    = submit_tag "Поиск"
+.container
+  #wrapper
+    %form
+      %fieldset
+        .row_fluid
+          = form_tag video_files_path, :method => 'get' do
+            %input.span8{ :id => "query", :type => "search", :name => "query", :placeholder => "Поиск: Введите название видео" }
 
 - if @video_files.count > 0
-  %p= paginate @video_files
   - if @query
     %h3 Результаты поиска
-  %ul
+
+  #wall.row-fluid.isotope
+    %p= paginate @video_files
     - @video_files.each do |file|
-      %li= link_to file.title, video_file_path(file)
-      - if file.video_url
-        - id = "playerLh7786aL_" + "#{file.id}"
-        .div{:id => "playerLh7786aL_" + "#{file.id}"}
-          %script{:type=>'text/javascript'}
-            = "jwplayer('#{id}').setup({ file: '#{file.video_url}', image: '#{file.image_url}', width: '25%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+      .item.span3.isotope-item
+        %p= link_to file.title, video_file_path(file)
+        - if file.video_url
+          - id = "playerLh7786aL_" + "#{file.id}"
+          .picture{:id => "playerLh7786aL_" + "#{file.id}"}
+            %script{:type=>'text/javascript'}
+              = "jwplayer('#{id}').setup({ file: '#{file.video_url}', image: '#{file.image_url}', width: '300px', height: '169px',aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+          .description
+            %p
+              = file.description
 - else
   %p На данный момент объектов нет.

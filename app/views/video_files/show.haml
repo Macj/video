@@ -1,26 +1,25 @@
-%p
-  %strong
-    Название:
-  = @video_file.title
-  #playerLh7786aL
+.container
+  %p.title
+    %strong
+    = @video_file.title
+    #playerLh7786aL
 
-%p
-  %strong
-    Описание:
-  = @video_file.description
+  %p.description
+    %strong
+    = @video_file.description
 
-%p
-  %strong
-    Ссылка:
-  = link_to @video_file.url, @video_file.url
+  %p
+    %strong
+      Ссылка:
+    = link_to @video_file.url, @video_file.url
 
-%p
-  - if current_user != nil
-    - if @video_file.user_id == current_user.id
-      = link_to "Редактировать", edit_video_file_path(@video_file)
+  %p
+    - if current_user != nil
+      - if @video_file.user_id == current_user.id
+        = link_to "Редактировать", edit_video_file_path(@video_file)
 
-%p
-  = link_to "Остальные видео", root_path
+  %p
+    = link_to "Остальные видео", root_path
 
-  %script{:type=>'text/javascript'}
-    = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+    %script{:type=>'text/javascript'}
+      = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe

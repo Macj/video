@@ -1,53 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Video</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <script src="http://jwpsrv.com/library/AtF23nyEEeOfwCIACrqE1A.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Video</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "bootstrap", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <script src="http://jwpsrv.com/library/AtF23nyEEeOfwCIACrqE1A.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <a class="brand" href="./">player.pm</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><%= link_to 'Главная', root_path %></li>
+                <%- if user_signed_in?%>
+                  <li><%= link_to 'Мои видео', my_videos_path %></li>
+                  <li><%= link_to "Добавить видео", new_video_file_path %></li>
+                  <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+                <% else %>
+                  <li><%= link_to 'Войти', sign_in_path %></li>
+                <% end %>
+                <li>
+                  <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+                    <a class="addthis_button_facebook"></a>
+                    <a class="addthis_button_twitter"></a>
+                    <a class="addthis_button_vk"></a>
+                    <a class="addthis_button_odnoklassniki_ru"></a>
+                    <a class="addthis_button_livejournal"></a>
+                    <a class="addthis_button_mymailru"></a>
+                    <a class="addthis_button_google_plusone_share"></a>
+                    <a class="addthis_button_pinterest_share"></a>
+                  </div>
+                  <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+                  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52dd74f65cff250e"></script>
+                </li>
+                  <% if flash[:notice] %>
+                    <p class="notice"><%= flash[:notice] %></p>
+                  <% end %>
+                  <% if flash[:error] %>
+                    <p class="error"><%= flash[:error] %></p>
+                  <% end %>
+                <li>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  <%= yield %>
 
-<h1>
-  player.pm
-</h1>
-<div>
-  <p>
-    <%= link_to 'Главная', root_path %>
-  </p>
-
-  <!-- AddThis Button BEGIN -->
-  <p>Поделиться ссылкой:</p>
-  <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
-  <a class="addthis_button_facebook"></a>
-  <a class="addthis_button_twitter"></a>
-  <a class="addthis_button_vk"></a>
-  <a class="addthis_button_odnoklassniki_ru"></a>
-  <a class="addthis_button_livejournal"></a>
-  <a class="addthis_button_mymailru"></a>
-  <a class="addthis_button_google_plusone_share"></a>
-  <a class="addthis_button_pinterest_share"></a>
-  </div>
-  <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52dd74f65cff250e"></script>
-  <!-- AddThis Button END -->
-  <%- if user_signed_in?%>
-    <%= link_to 'Мои видео', my_videos_path %>
-    <p>
-      <%= link_to('Sign out', destroy_user_session_path, :method => :delete) %>
-    </p>
-  <% end%>
-</div>
-
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<% if flash[:error] %>
-  <p class="error"><%= flash[:error] %></p>
-<% end %>
-
-<%= yield %>
-
-</body>
+  </body>
 </html>
