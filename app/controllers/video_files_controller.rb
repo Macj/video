@@ -3,7 +3,6 @@ require 'video_parser'
 
 class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
-  before_action :update_vimeo_link, only: [:show]
   before_action :autorize_user, only: [:my_videos, :create, :edit]
 
   def index
@@ -15,13 +14,11 @@ class VideoFilesController < ApplicationController
       redirect_to root_path
     else
       @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(5)
-      update_vimeo_links @video_files
     end
   end
 
   def my_videos
     @video_files = VideoFile.where(:user_id => current_user.id).limit(20)
-    update_vimeo_links @video_files
   end
 
   def new
@@ -49,13 +46,12 @@ class VideoFilesController < ApplicationController
     data = VideoParser.parse_video_params(@video_file.url, session[:vk_token])
     @title = data[:title]
     @description = data[:description]
-    @link = data[:link]
     @image = data[:image_url]
     @player = data[:player]
-    if @video_file.vk? or @video_file.vimeo? or @video_file.vk_and_vimeo?
-      @video_file.update_attributes(:title => @title, :description => @description, :player => @player, :image_url => @image, :video_url => @link)
+    if @video_file.vk?
+      @video_file.update_attributes(:title => @title, :description => @description, :player => @player, :image_url => @image)
     else
-      @video_file.update_attributes(:title => @title, :description => @description, :video_url => @link)
+      @video_file.update_attributes(:title => @title, :description => @description)
     end
   end
 
@@ -69,18 +65,6 @@ class VideoFilesController < ApplicationController
     end
   end
 
-  def update_vimeo_links video_files
-    video_files.where("player LIKE '%vimeo%'").each do |file|
-      if file.player and file.player.match(/vimeo/)
-        data = VideoParser::Vimeo.get_vimeo_link(file.player)
-        @link = data[:direct_link]
-        file.update_attribute(:video_url, @link)
-      end
-    end
-
-    return video_files
-  end
-
   private
     def set_video_file
       @video_file = VideoFile.find(params[:id])
@@ -92,14 +76,6 @@ class VideoFilesController < ApplicationController
 
     def video_file_params_edited
       params.require(:video_file).permit(:title, :description, :player)
-    end
-
-    def update_vimeo_link
-      if @video_file.player and @video_file.player.match(/vimeo/)
-        data = VideoParser::Vimeo.get_vimeo_link(@video_file.player)
-        @link = data[:direct_link]
-        @video_file.update_attributes(:video_url => @link)
-      end
     end
 
     def autorize_user

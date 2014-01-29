@@ -6,22 +6,24 @@
           = form_tag video_files_path, :method => 'get' do
             %input.span8{ :id => "query", :type => "search", :name => "query", :placeholder => "Поиск: Введите название видео" }
 
-- if @video_files.count > 0
-  - if @query
-    %h3 Результаты поиска
+    - if @video_files.count > 0
+      - if @query
+        %h3 Результаты поиска
 
-  #wall.row-fluid.isotope
-    %p= paginate @video_files
-    - @video_files.each do |file|
-      .item.span3.isotope-item
-        %p= link_to file.title, video_file_path(file)
-        - if file.video_url
-          - id = "playerLh7786aL_" + "#{file.id}"
-          .picture{:id => "playerLh7786aL_" + "#{file.id}"}
-            %script{:type=>'text/javascript'}
-              = "jwplayer('#{id}').setup({ file: '#{file.video_url}', image: '#{file.image_url}', width: '300px', height: '169px',aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
-          .description
-            %p
-              = file.description
-- else
-  %p На данный момент объектов нет.
+      #wall.row-fluid.isotope
+        %p= paginate @video_files
+        - @video_files.each do |file|
+          .item.span3.isotope-item
+            %p= link_to file.title, video_file_path(file)
+            - if file.video_url
+              - if file.youtube?
+                %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{file.player}", :frameborder => "0", :allowfullscreen => true}
+              - elsif file.vimeo?
+                %iframe{:src => "//player.vimeo.com/video/#{file.player}", :width => "200", :height => "100", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+              - elsif file.vk?
+                %iframe{:src => "#{file.player}", :width => "300", :height => "169", :frameborder => "0"}
+              %div.description
+                %p
+                  = file.description
+    - else
+      %p На данный момент объектов нет.

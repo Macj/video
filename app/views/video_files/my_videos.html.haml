@@ -1,14 +1,17 @@
+.container
 - if @video_files.count > 0
   %ul
     - @video_files.each do |file|
       %li= link_to file.title, video_file_path(file)
       - if file.player
-        - id = "playerLh7786aL_" + "#{file.id}"
-        .div{:id => "playerLh7786aL_" + "#{file.id}"}
-          %script{:type=>'text/javascript'}
-            = "jwplayer('#{id}').setup({ file: '#{file.video_url}', width: '25%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
-          %p
-            = link_to "Редактировать", edit_video_file_path(file)
+        - if file.youtube?
+          %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{file.player}", :frameborder => "0", :allowfullscreen => true}
+        - elsif file.vimeo?
+          %iframe{:src => "//player.vimeo.com/video/#{file.player}", :width => "200", :height => "100", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+        - elsif file.vk?
+          %iframe{:src => "#{file.player}", :width => "300", :height => "169", :frameborder => "0"}
+        %p
+          = link_to "Редактировать", edit_video_file_path(file)
         
 - else
   %p На данный момент объектов нет.

@@ -8,12 +8,18 @@
         = f.label :description
         = f.text_area :description, :value => @description
 
-      .p
+      %p
         Preview
-      #playerLh7786aL
+        %p
+        - if @video_file.youtube?
+          %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
+        - elsif @video_file.vimeo?
+          %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+        - elsif @video_file.vk?
+          %iframe{:src => "#{@video_file.player}", :width => "300", :height => "169", :frameborder => "0"}
 
       .actions
         = f.submit "Сохранить"
 
-      %script{:type=>'text/javascript'}
-        = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+      / %script{:type=>'text/javascript'}
+      /   = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe

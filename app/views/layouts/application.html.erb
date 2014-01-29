@@ -2,11 +2,12 @@
 <html>
   <head>
     <title>Video</title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "layerslider", media: "all", "data-turbolinks-track" => true %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <script src="http://jwpsrv.com/library/AtF23nyEEeOfwCIACrqE1A.js"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -39,14 +40,12 @@
                   <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
                   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52dd74f65cff250e"></script>
                 </li>
-                  <% if flash[:notice] %>
-                    <p class="notice"><%= flash[:notice] %></p>
-                  <% end %>
-                  <% if flash[:error] %>
-                    <p class="error"><%= flash[:error] %></p>
-                  <% end %>
-                <li>
-                </li>
+                <% if flash[:notice] %>
+                  <li class="notice"><%= flash[:notice] %></li>
+                <% end %>
+                <% if flash[:error] %>
+                  <li class="error"><%= flash[:error] %></li>
+                <% end %>
               </ul>
             </div>
           </div>

@@ -24,32 +24,7 @@ module VideoParser
       description = @data["description"].to_s
       player = @data["player"].to_s
       image_url = @data["image_medium"]
-
-      if player.match(/youtube/)
-        direct_link = youtube_link(player)
-      elsif player.match(/vimeo/)
-        data = vimeo_link(player)
-        direct_link = data[:direct_link]
-        image_url = data[:image_url]
-      elsif player.match(/vk/)
-        direct_link = vk_link(player)
-      end
-
-      data = { :title => title, :description => description, :player => player, :link => direct_link, :image_url => image_url }
-    end
-
-    def self.youtube_link player
-      player.gsub('/embed/', '/watch?v=')
-    end
-
-    def self.vimeo_link player
-      Vimeo.get_vimeo_link(player)
-    end
-
-    def self.vk_link player
-      doc = NokogiriParser.get_doc(player)
-      elem = doc.xpath('//param[@name="flashvars"]').attribute("value").to_s
-      direct_link = elem[/url240=(.*?)&/,1]
+      data = { :title => title, :description => description, :player => player, :image_url => image_url }
     end
   end
 end

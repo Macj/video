@@ -2,7 +2,14 @@
   %p.title
     %strong
     = @video_file.title
-    #playerLh7786aL
+  %p
+  - if @video_file.player?
+    - if @video_file.youtube?
+      %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
+    - elsif @video_file.vimeo?
+      %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+    - elsif @video_file.vk?
+      %iframe{:src => "#{@video_file.player}", :width => "300", :height => "169", :frameborder => "0"}
 
   %p.description
     %strong

@@ -33,11 +33,11 @@ audio:not([controls]) {
   display: none;
 }
 
-/*html {
+html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
-}*/
+}
 
 a:focus {
   outline: thin dotted #333;
@@ -222,12 +222,12 @@ textarea {
 }
 
 body {
-/*  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+/*  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;*/
   line-height: 20px;
-/*  color: #333333;
-  background-color: #ffffff;*/
+/*  color: #333333;*/
+/*  background-color: #ffffff;*/
 }
 
 a {
@@ -284,12 +284,12 @@ a:hover {
   margin-left: 20px;
 }
 
-.container,
+/*.container,
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-/*  width: 940px;*/
-}
+  width: 940px;
+}*/
 
 .span12 {
   width: 940px;
@@ -4296,7 +4296,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inner {
   min-height: 40px;
-/*  padding-right: 20px;
+  padding-right: 20px;
   padding-left: 20px;
   background-color: #fafafa;
   background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
@@ -4313,7 +4313,7 @@ input[type="submit"].btn.btn-mini {
   *zoom: 1;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);*/
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
 .navbar-inner:before,
@@ -4339,7 +4339,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   display: block;
   float: left;
-  padding: 10px 20px 10px;
+/*  padding: 10px 20px 10px;*/
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
@@ -4711,14 +4711,14 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inverse .navbar-inner {
   background-color: #1b1b1b;
-/*  background-image: -moz-linear-gradient(top, #222222, #111111);
+  background-image: -moz-linear-gradient(top, #222222, #111111);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
   background-image: -webkit-linear-gradient(top, #222222, #111111);
   background-image: -o-linear-gradient(top, #222222, #111111);
   background-image: linear-gradient(to bottom, #222222, #111111);
   background-repeat: repeat-x;
   border-color: #252525;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);*/
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
 }
 
 .navbar-inverse .brand,
