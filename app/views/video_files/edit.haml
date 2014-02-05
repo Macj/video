@@ -1,25 +1,28 @@
 .container
-  = form_for(@video_file) do |f|
-    %fieldset
-      .field
-        = f.label :title
-        = f.text_field :title, :value => @title
-      .field
-        = f.label :description
-        = f.text_area :description, :value => @description
+  #wrapper{ :class => "full", :style => "margin-top: 60px"}
+    .row-fluid
+      .span9
+        #contact-form
+          = form_for(@video_file) do |f|
+            %fieldset
+              .row-fluid
+                = f.label :title, "Название"
+                = f.text_field :title, :value => @title, :class => "span4"
+              .row-fluid
+                = f.label :description, "Описание"
+                = f.text_area :description, :value => @description, :class => "span12", :style => "height: 130px"
 
-      %p
-        Preview
-        %p
-        - if @video_file.youtube?
-          %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
-        - elsif @video_file.vimeo?
-          %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
-        - elsif @video_file.vk?
-          %iframe{:src => "#{@video_file.player}", :width => "300", :height => "169", :frameborder => "0"}
+              %p
+                Превью
+                %p
+                - if @video_file.youtube?
+                  %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
+                - elsif @video_file.vimeo?
+                  %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+                - elsif @video_file.vk?
+                  %iframe{:src => "#{@video_file.player}", :width => "300", :height => "169", :frameborder => "0"}
 
-      .actions
-        = f.submit "Сохранить"
+              .actions
+                = f.submit "Сохранить", :class => "btn"
 
-      / %script{:type=>'text/javascript'}
-      /   = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '30%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+= render partial: 'partials/footer'

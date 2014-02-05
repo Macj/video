@@ -1,7 +1,28 @@
-%p Войти с помощью:
+.container
+  .row-fluid
+    #page-title.span4.offset4
+      %h2 Войдите в свой аккаунт или зарегистрируйтесь
 
-%table
-  %tr
-    %th= link_to image_tag("facebook.png"), "/auth/facebook", id: "sign_in"
-    %th= link_to image_tag("vk_2.png"), "/auth/vkontakte", id: "sign_in"
-    %th= link_to image_tag("google_plus.png"), "/auth/google_oauth2", id: "sign_in"
+  .row-fluid
+    #wrapper.full.lr-page.span4.offset4
+      .row-fluid
+        #login-form.span12
+          .page-title-small
+            %h3 используя социальные сети
+          .page-title-small
+            = link_to image_tag("facebook.png"), "/auth/facebook", id: "sign_in", style: 'background:#f0f0f0'
+            = link_to image_tag("vk_2.png"), "/auth/vkontakte", id: "sign_in", style: 'background:#f0f0f0'
+            = link_to image_tag("google_plus.png"), "/auth/google_oauth2", id: "sign_in", style: 'background:#f0f0f0'
+            / %script{ :src => "//ulogin.ru/js/ulogin.js" }
+            / %a{ :href => "#", :id => "uLoginb2ca51af", 'data-ulogin' => "display=window;fields=first_name,last_name,email;redirect_uri='#{url_encode "https://localhost:3000/sign_in?authenticity_token=" + form_authenticity_token}'" }
+            /   %img{ :src => "https://ulogin.ru/img/button.png", :width => "187", :height => "30", :alt => "МультиВход"}
+          .page-title-small
+            %h3{ style: 'background:#f0f0f0' } Инструкция
+          %form{ method: 'post' }
+            Как только Вы первый раз войдете на player.pm используя любую из социальных сетей, Вы автоматически зарегистрируетесь. В дальнейшем, для авторизации, используйте Вашу социальную сеть.
+            %hr
+              Все видео и фото материалы будут доступны сразу после регистрации / авторизации на player.pm
+            %hr
+              Как и на сайте discovery-online.tv, Вы можете просматривать все доступные материалы на player.pm бесплатно и без рекламы.
+
+= render partial: 'partials/footer'

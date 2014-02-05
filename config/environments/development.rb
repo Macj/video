@@ -27,6 +27,8 @@ Video::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # config.force_ssl = true
+
   # GOOGLE_KEY = "219652618621.apps.googleusercontent.com"
   # GOOGLE_SECRET = "XQCC45V3uPB00u7Ek9d1W4pO"
 

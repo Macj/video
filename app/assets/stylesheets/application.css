@@ -13,10 +13,12 @@
  */
 .error { 
   color: red;
+  margin-bottom: 15px;
 }
 
 .notice {
-  color: green;
+  color: #696969;
+  margin-bottom: 15px;
 }
 
 
@@ -49,7 +51,7 @@ body {
     font-family: 'Droid Sans', sans-serif;
     font-weight: 400;
     background: #ccc;
-    color: #000;
+/*    color: #000;*/
     font-size: 12px;
 }
 
@@ -59,6 +61,7 @@ body {
 
 a {
     color: #242424;
+    text-decoration: none;
 }
 
 a:hover {
@@ -321,12 +324,12 @@ header {
 .navbar-inverse {
     background: transparent !important;
     filter: none !important;
-    border: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
     padding: 0px;
-    margin: 0;
+    margin: 0 !important;
 }
 
 .navbar-inner {
@@ -346,7 +349,19 @@ header {
     -o-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
 
+.share-message {
+    color: #a3a3a3;
+    text-shadow: 0 1px 0 #ffffff;
+    border-top: 4px solid transparent;
+    font-size: 14px;
+    padding: 10px 15px 10px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .navbar .nav > li > a:focus,
@@ -443,6 +458,10 @@ header {
 .nav .active .dropdown-toggle .caret {
     border-top-color: #080808 !important;
     border-bottom-color: #080808 !important;
+}
+
+.social-links {
+  margin-top: 15px;
 }
 
 /* Wrapper
@@ -2065,6 +2084,25 @@ ol li ol.childlist .comment-des {
 
 .ie7 .comment-by .date {
     display: none;
+}
+
+/* Download
+=================================================================== */
+
+.download {
+    padding: 80px 0 400px 0;
+}
+
+.edit {
+    padding: 80px 0 300px 0;
+}
+
+.my_videos {
+    padding: 80px 0 200px 0;
+}
+
+.video {
+    padding: 80px 0 250px 0;
 }
 
 /* Contact Form

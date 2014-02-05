@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Video</title>
+    <%= stylesheet_link_tag    "fonts/droid_sans", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "fonts/droid_serif", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "fonts/boogaloo", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "fonts/economica", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -22,11 +26,12 @@
                 <%- if user_signed_in?%>
                   <li><%= link_to 'Мои видео', my_videos_path %></li>
                   <li><%= link_to "Добавить видео", new_video_file_path %></li>
-                  <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+                  <li><%= link_to('Выйти', destroy_user_session_path, :method => :delete) %></li>
                 <% else %>
                   <li><%= link_to 'Войти', sign_in_path %></li>
                 <% end %>
-                <li>
+                <li class="share-message">Поделиться с друзьями:</li>
+                <li class="social-links">
                   <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
                     <a class="addthis_button_facebook"></a>
                     <a class="addthis_button_twitter"></a>
@@ -40,12 +45,6 @@
                   <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
                   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52dd74f65cff250e"></script>
                 </li>
-                <% if flash[:notice] %>
-                  <li class="notice"><%= flash[:notice] %></li>
-                <% end %>
-                <% if flash[:error] %>
-                  <li class="error"><%= flash[:error] %></li>
-                <% end %>
               </ul>
             </div>
           </div>

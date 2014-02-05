@@ -3,9 +3,10 @@ require 'video_parser'
 
 class VideoFilesController < ApplicationController
   before_action :set_video_file, only: [:show, :edit, :update]
-  before_action :autorize_user, only: [:my_videos, :create, :edit]
+  before_action :autorize_user, only: [:my_videos, :create, :edit, :show]
 
   def index
+    puts params[:vk_token]
     @query = params[:query]
     if @query and @query != ""
       @video_files = VideoFile.search_query(@query).order('created_at DESC').page(params[:page])
@@ -13,13 +14,26 @@ class VideoFilesController < ApplicationController
       flash[:error] = "Введите запрос."
       redirect_to root_path
     else
-      @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(5)
+      @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(10)
     end
   end
 
   def my_videos
-    @video_files = VideoFile.where(:user_id => current_user.id).limit(20)
+    @video_files = VideoFile.where(:user_id => current_user.id).page(params[:page]).per(10)
   end
+
+  # def show
+  #   if current_user != nil
+  #     # if params[:body] and params != ""
+  #     @comment = @video_file.comments.build(params[:comment])
+  #     if @comment.save
+  #       flash[:notice] = "Ваш комментарий добавлен."
+  #       redirect_to root_path
+  #     end
+  #     #@comment.update_attributes(video_file_id: @video_file.id, user_id: current_user.id, body: params[:body])
+  #     # end
+  #   end
+  # end
 
   def new
     @video_file = VideoFile.new
@@ -33,7 +47,7 @@ class VideoFilesController < ApplicationController
     elsif @video_file.url.match(/vk/) and current_user.provider != "vkontakte"
       flash[:error] = "Вы должны авторизоваться Вконтакте."
       redirect_to sign_in_path
-    elsif @video_file.save
+    elsif @video_file.save and @video_file.valid?
       flash[:notice] = "Видео успешно загрузилось."
       redirect_to edit_video_file_path(@video_file)
     else

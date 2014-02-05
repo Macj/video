@@ -1,32 +1,44 @@
 .container
-  %p.title
-    %strong
-    = @video_file.title
-  %p
-  - if @video_file.player?
-    - if @video_file.youtube?
-      %iframe{:width => "300", :height => "169", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
-    - elsif @video_file.vimeo?
-      %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "300", :height => "169", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
-    - elsif @video_file.vk?
-      %iframe{:src => "#{@video_file.player}", :width => "300", :height => "169", :frameborder => "0"}
+  #wrapper.full
+    .row-fluid
+      .span8.separate
+        #about
+          %h3= @video_file.title
 
-  %p.description
-    %strong
-    = @video_file.description
+          - if current_user.nil?
+            .pagination
+              %h2 Войдите в свой аккаунт или зарегистрируйтесь
+              %script{ :src => "//ulogin.ru/js/ulogin.js" }
+              .page-title-small
+                %a{ :href => "#", :id => "uLoginb2ca51af", 'data-ulogin' => "display=window;fields=first_name,last_name, email;redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsign_in" }
+                  %img{ :src => "http://ulogin.ru/img/button.png", :width => "187", :height => "30", :alt => "МультиВход"}
+          .flex-video
+            - if @video_file.player?
+              - if @video_file.youtube?
+                %iframe{:width => "640", :height => "360", :src => "//www.youtube.com/embed/#{@video_file.player}", :frameborder => "0", :allowfullscreen => true}
+              - elsif @video_file.vimeo?
+                %iframe{:src => "//player.vimeo.com/video/#{@video_file.player}", :width => "640", :height => "360", :frameborder =>"0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
+              - elsif @video_file.vk?
+                %iframe{:src => "#{@video_file.player}", :width => "640", :height => "360", :frameborder => "0"}
+        %hr
+        #history
+          %h3 Описание видео
+          %p= @video_file.description
+          %p
+            - if current_user != nil
+              - if @video_file.user_id == current_user.id
+                %strong
+                  = link_to "Редактировать", edit_video_file_path(@video_file)
+        %hr
+        #history
+          %h3 Комментарии
+          = render :partial => @video_file.comments
+          #contact-form
+            = form_for [@video_file, Comment.new] do |f|
+              %fieldset
+                .row-fluid
+                  = f.text_area :body, :class => "span12", :placeholder => "Напишите Ваш комментарий"
+                .actions
+                  = f.button "Отправить комментарий", :class => "btn"
 
-  %p
-    %strong
-      Ссылка:
-    = link_to @video_file.url, @video_file.url
-
-  %p
-    - if current_user != nil
-      - if @video_file.user_id == current_user.id
-        = link_to "Редактировать", edit_video_file_path(@video_file)
-
-  %p
-    = link_to "Остальные видео", root_path
-
-    %script{:type=>'text/javascript'}
-      = "jwplayer('playerLh7786aL').setup({ file: '#{@video_file.video_url}', image: '#{@video_file.image_url}', width: '50%', aspectratio: '16:9', fallback: 'false', primary: 'flash'});".html_safe
+= render partial: 'partials/footer'

@@ -10,6 +10,7 @@ module VideoParser
       else
         description = doc.at_css('div.description > p.first').content
       end
+
       data = { :title => title, :description => description }
     end
   end

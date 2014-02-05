@@ -1,15 +1,36 @@
 .container
   - if user_signed_in?
-    = form_for(@video_file) do |f|
-      = f.hidden_field :user_id, :value => current_user.id
-      %fieldset
-        .field
-          = f.label :url
-          = f.text_area :url
-        .actions
-          = f.submit "Загрузить"
+    #page-title
+      %h2 Добавить новое видео
+
+    #wrapper{ :class => "full", :style => "margin-top: 60px"}
+      .row-fluid
+        .span9.separate
+          #contact-form
+            = form_for(@video_file) do |f|
+              = f.hidden_field :user_id, :value => current_user.id
+              %fieldset
+                .row-fluid
+                  = f.text_field :url, :placeholder => "Ссылка на видео", :class => "span12"
+              .actions
+                = f.button "Отправить видео", :class => "btn"
+        .span3
+          %h3 Строго запрещено
+          %p
+            %b 1.
+            Вставлять видеоролики с нецензурной информацией (порно, насилие, расизм и т.д.).
+          %p
+            %b 2.
+            Вставлять видеоролики нарушающие закон "Про авторское право".
+          %p
+            %b 3.
+            Вставлять ролики не несущие информации.
+          %p
+            Прежде чем видео попадет в публикации, оно будет проходить модерацию. Модерация занимает обычно от 30 минут до 12 часов. Как только Ваш аккаунт становится "проверенным", Ваши публикации будут добавляться без модерации.
   - else
     Добавить видео может только авторизованный пользователь.
     %br
     = link_to 'Авторизуйтесь', sign_in_path()
     через любой сервис.
+
+= render partial: 'partials/footer'
