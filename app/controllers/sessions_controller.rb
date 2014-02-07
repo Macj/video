@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     sign_in(:user, user)
     session[:user_id] = user.id
     session[:vk_token] = env["omniauth.auth"]["credentials"]["token"]
+    puts env["omniauth.auth"]
     puts session[:vk_token]
     puts env["omniauth.auth"]
     first_name = env["omniauth.auth"]["info"]["first_name"]

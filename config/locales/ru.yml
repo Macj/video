@@ -23,12 +23,12 @@ ru:
         few: около %{count} часов
         many: около %{count} часов
         one: около %{count} часа
-        other: около %{count} часа
+        other: около %{count} часов
       about_x_months:
         few: около %{count} месяцев
         many: около %{count} месяцев
         one: около %{count} месяца
-        other: около %{count} месяца
+        other: около %{count} месяцев
       about_x_years:
         few: около %{count} лет
         many: около %{count} лет
@@ -44,12 +44,12 @@ ru:
         few: меньше %{count} минут
         many: меньше %{count} минут
         one: меньше %{count} минуты
-        other: меньше %{count} минуты
+        other: меньше %{count} минут
       less_than_x_seconds:
         few: меньше %{count} секунд
         many: меньше %{count} секунд
         one: меньше %{count} секунды
-        other: меньше %{count} секунды
+        other: меньше %{count} секунд
       over_x_years:
         few: больше %{count} лет
         many: больше %{count} лет

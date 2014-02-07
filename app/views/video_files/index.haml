@@ -14,7 +14,7 @@
       #wall.row-fluid
         %p= paginate @video_files
         - @video_files.each do |file|
-          .item.span3.isotope-item
+          .item.span3
             %p= link_to file.title, video_file_path(file)
             .picture
               - if file.youtube?
@@ -27,7 +27,7 @@
               %p
                 = file.description
     - else
-      %h2{ style: "padding: 200px 0px 200px 0px; text-align: center; color: #B8B8B8" } На данный момент объектов нет.
+      %h2{ style: "padding: 200px 0px 200px 0px; text-align: center; color: #000000" } На данный момент объектов нет.
 
     = render partial: 'partials/pagination'
 = render partial: 'partials/footer'

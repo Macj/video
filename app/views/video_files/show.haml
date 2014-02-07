@@ -1,7 +1,7 @@
 .container
   #wrapper.full
     .row-fluid
-      .span8.separate
+      .span8
         #about
           %h3= @video_file.title
 
@@ -33,12 +33,13 @@
         #history
           %h3 Комментарии
           = render :partial => @video_file.comments
-          #contact-form
-            = form_for [@video_file, Comment.new] do |f|
-              %fieldset
-                .row-fluid
-                  = f.text_area :body, :class => "span12", :placeholder => "Напишите Ваш комментарий"
-                .actions
-                  = f.button "Отправить комментарий", :class => "btn"
+          - if current_user != nil
+            #contact-form
+              = form_for [@video_file, Comment.new] do |f|
+                %fieldset
+                  .row-fluid
+                    = f.text_area :body, :class => "span12", :placeholder => "Напишите Ваш комментарий"
+                  .actions
+                    = f.button "Отправить комментарий", :class => "btn"
 
 = render partial: 'partials/footer'

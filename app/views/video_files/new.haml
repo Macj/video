@@ -5,7 +5,7 @@
 
     #wrapper{ :class => "full", :style => "margin-top: 60px"}
       .row-fluid
-        .span9.separate
+        .span9.separate{:style => "height: 312px"}
           #contact-form
             = form_for(@video_file) do |f|
               = f.hidden_field :user_id, :value => current_user.id

@@ -1,6 +1,8 @@
 = div_for comment do
   %p
+    %p
+      #{image_tag(comment.user.avatar)} #{comment.user.first_name} #{comment.user.last_name}
+    = comment.body
+    %br
     %strong
       Опубликовано #{time_ago_in_words(comment.created_at)} назад
-    %br
-    = comment.body

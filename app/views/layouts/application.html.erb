@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "layerslider", media: "all", "data-turbolinks-track" => true %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", media: "all" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -26,7 +26,7 @@
                 <%- if user_signed_in?%>
                   <li><%= link_to 'Мои видео', my_videos_path %></li>
                   <li><%= link_to "Добавить видео", new_video_file_path %></li>
-                  <li><%= link_to('Выйти', destroy_user_session_path, :method => :delete) %></li>
+                  <li><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></li>
                 <% else %>
                   <li><%= link_to 'Войти', sign_in_path %></li>
                 <% end %>
