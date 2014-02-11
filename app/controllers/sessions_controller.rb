@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     puts env["omniauth.auth"]
     first_name = env["omniauth.auth"]["info"]["first_name"]
     last_name = env["omniauth.auth"]["info"]["last_name"]
-    flash[:notice] = "Добро пожаловать, #{first_name} #{last_name}! Вы вошли!"
+    flash.now[:notice] = "Добро пожаловать, #{first_name} #{last_name}! Вы вошли!"
     redirect_to root_url
   end
 

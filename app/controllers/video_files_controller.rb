@@ -11,7 +11,7 @@ class VideoFilesController < ApplicationController
     if @query and @query != ""
       @video_files = VideoFile.search_query(@query).order('created_at DESC').page(params[:page])
     elsif @query and @query == ""
-      flash[:error] = "Введите запрос."
+      flash.now[:error] = "Введите запрос."
       redirect_to root_path
     else
       @video_files = VideoFile.order('created_at DESC').page(params[:page]).per(10)
@@ -42,16 +42,16 @@ class VideoFilesController < ApplicationController
   def create
     @video_file = VideoFile.new(video_file_params)
 
-    if @video_file.url.match(/vimeo.com/) and !@video_file.url.include?('https')
-      @video_file.url = @video_file.url.insert(4, 's')
-    elsif @video_file.url.match(/vk/) and current_user.provider != "vkontakte"
-      flash[:error] = "Вы должны авторизоваться Вконтакте."
-      redirect_to sign_in_path
+    if @video_file.vk?
+      if current_user.provider != "vkontakte"
+        flash.now[:error] = "Вы должны авторизоваться Вконтакте."
+        redirect_to sign_in_path
+      end
     elsif @video_file.save and @video_file.valid?
-      flash[:notice] = "Видео успешно загрузилось."
+      flash.now[:notice] = "Видео успешно загрузилось."
       redirect_to edit_video_file_path(@video_file)
     else
-      flash[:error] = "Видео не было загружено. Попробуйте ещё раз."
+      flash.now[:error] = "Видео не было загружено. Попробуйте ещё раз."
       render :new
     end
   end
@@ -71,10 +71,10 @@ class VideoFilesController < ApplicationController
 
   def update
     if @video_file.update_attributes(video_file_params_edited)
-      flash[:notice] = "Видео успешно сохранено."
+      flash.now[:notice] = "Видео успешно сохранено."
       redirect_to video_file_path(@video_file)
     else
-      flash[:error] = "Видео не было сохранено. Попробуйте ещё раз."
+      flash.now[:error] = "Видео не было сохранено. Попробуйте ещё раз."
       render :edit
     end
   end
@@ -95,7 +95,7 @@ class VideoFilesController < ApplicationController
     def autorize_user
       if current_user == nil
         puts current_user.inspect
-        flash[:error] = "Нужна авторизация."
+        flash.now[:error] = "Нужна авторизация."
         redirect_to sign_in_path
       end
     end

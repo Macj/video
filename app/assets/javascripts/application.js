@@ -10,11 +10,22 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require jquery-1.8.2
 //= require isotope
+//= require jquery.imagesloaded
 //= require bootstrap
+//= require flexslider
 //= require carousel
-//= require modernizr
+//= require jquery.cslider
+//= require slider
+//= require twitter.js
+//= require jquery.placeholder.min
+//= require jquery-easing-1.3
+//= require layerslider.kreaturamedia.jquery
+//= require excanvas
+//= require jquery.flot
+//= require jquery.flot.pie.min
+//= require jquery.flot.stack
+//= require jquery.flot.resize.min
+//= require_tree .
+

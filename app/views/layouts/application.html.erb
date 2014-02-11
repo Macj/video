@@ -7,8 +7,8 @@
     <%= stylesheet_link_tag    "fonts/boogaloo", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "fonts/economica", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap", media: "all", "data-turbolinks-track" => true %>
-    <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "layerslider", media: "all", "data-turbolinks-track" => true %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= javascript_include_tag "application", media: "all" %>
@@ -19,6 +19,11 @@
       <div class="container">
         <div class="navbar navbar-inverse">
           <div class="navbar-inner">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
             <a class="brand" href="./">player.pm</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -31,7 +36,7 @@
                   <li><%= link_to 'Войти', sign_in_path %></li>
                 <% end %>
                 <li class="share-message">Поделиться с друзьями:</li>
-                <li class="social-links">
+                <li class="links">
                   <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
                     <a class="addthis_button_facebook"></a>
                     <a class="addthis_button_twitter"></a>

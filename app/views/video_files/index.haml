@@ -11,10 +11,10 @@
       - if @query
         %h3 Результаты поиска
 
-      #wall.row-fluid
+      #wall.row-fluid.isotope
         %p= paginate @video_files
         - @video_files.each do |file|
-          .item.span3
+          .item.span3.isotope-item
             %p= link_to file.title, video_file_path(file)
             .picture
               - if file.youtube?
@@ -26,6 +26,14 @@
             .description
               %p
                 = file.description
+            .meta
+              %span
+                / %i.fa-icon-calendar
+                = I18n.l file.created_at.localtime
+              %br
+              %span
+                / %i.fa-icon-user
+                #{file.user.first_name} #{file.user.last_name}
     - else
       %h2{ style: "padding: 200px 0px 200px 0px; text-align: center; color: #000000" } На данный момент объектов нет.
 

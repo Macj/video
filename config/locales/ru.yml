@@ -17,6 +17,49 @@ ru:
       truncate: "..."
       last: "В конец"
       first: "В начало"
+  date:
+    abbr_day_names:
+    - Вс
+    - Пн
+    - Вт
+    - Ср
+    - Чт
+    - Пт
+    - Сб
+    abbr_month_names:
+    -
+    - янв.
+    - февр.
+    - марта
+    - апр.
+    - мая
+    - июня
+    - июля
+    - авг.
+    - сент.
+    - окт.
+    - нояб.
+    - дек.
+    day_names:
+    - воскресенье
+    - понедельник
+    - вторник
+    - среда
+    - четверг
+    - пятница
+    - суббота
+    formats:
+      default: ! '%d.%m.%Y'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
+      day_and_month: ! '%d %B'
+  time:
+    am: утра
+    formats:
+      default: ! '%a, %d %b %Y, %H:%M:%S'
+      long: ! '%d %B %Y, %H:%M'
+      with_seconds: ! '%d %B %Y, %H:%M:%S'
+      short: ! '%d %b, %H:%M'
   datetime:
     distance_in_words:
       about_x_hours:

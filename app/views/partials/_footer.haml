@@ -9,6 +9,8 @@
         %h3 Новости на Твиттере
       .span3
         %h3 Мы в социальных сетях
+        %a{:href => "", :class => "social-twitter"}
+        %a{:href => "", :class => "social-facebook"}
 
 #under-footer
   .container
@@ -18,4 +20,8 @@
           = link_to 'player.pm', root_path, :class => 'brand'
       .span9
         #under-footer-copyright
-          © 2014 создано людьми для людей 
+          © 2014 создано людьми для людей
+          = image_tag 'poland.png', :style => "margin-top:-4px"
+      .span1
+        #under-footer-back-to-top
+          %a{:href => "#"}
