@@ -42,11 +42,9 @@ class VideoFilesController < ApplicationController
   def create
     @video_file = VideoFile.new(video_file_params)
 
-    if @video_file.vk?
-      if current_user.provider != "vkontakte"
+    if @video_file.vk? and current_user.provider != "vkontakte"
         flash.now[:error] = "Вы должны авторизоваться Вконтакте."
         redirect_to sign_in_path
-      end
     elsif @video_file.save and @video_file.valid?
       flash.now[:notice] = "Видео успешно загрузилось."
       redirect_to edit_video_file_path(@video_file)
@@ -58,14 +56,20 @@ class VideoFilesController < ApplicationController
 
   def edit
     data = VideoParser.parse_video_params(@video_file.url, session[:vk_token])
-    @title = data[:title]
-    @description = data[:description]
-    @image = data[:image_url]
-    @player = data[:player]
-    if @video_file.vk?
-      @video_file.update_attributes(:title => @title, :description => @description, :player => @player, :image_url => @image)
+    if data[:error] == true
+      @video_file.destroy
+      flash.now[:error] = "Вы загрузили неверную ссылку. Попробуйте еще раз."
+      render :new
     else
-      @video_file.update_attributes(:title => @title, :description => @description)
+      @title = data[:title]
+      @description = data[:description]
+      @image = data[:image_url]
+      @player = data[:player]
+      if @video_file.vk?
+        @video_file.update_attributes(:title => @title, :description => @description, :player => @player, :image_url => @image)
+      else
+        @video_file.update_attributes(:title => @title, :description => @description)
+      end
     end
   end
 

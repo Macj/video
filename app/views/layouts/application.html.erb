@@ -10,9 +10,9 @@
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "bootstrap-responsive", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag    "layerslider", media: "all", "data-turbolinks-track" => true %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= javascript_include_tag "application", media: "all" %>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
   <body>
     <header>
@@ -56,6 +56,20 @@
         </div>
       </div>
     </header>
+
+  <script type="text/javascript">
+    $(document).ready(function(){ 
+      var $container = $('#wall.row-fluid.isotope');
+      $container.imagesLoaded( function() {
+        $container.masonry({
+          itemSelector: '.item.span3.isotope-item',
+              singleMode: false,
+          isResizable: true,
+          isAnimated: !Modernizr.csstransitions
+        });
+      });
+    });
+  </script>
   <%= yield %>
 
   </body>

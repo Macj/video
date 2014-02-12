@@ -21,36 +21,6 @@
   margin-bottom: 15px;
 }
 
-
-*= require 'masonry/basic'
-*= require 'masonry/centered'
-*= require 'masonry/fluid'
-*= require 'masonry/gutters'
-*= require 'masonry/infinitescroll'
-*= require 'masonry/right-to-left'
-*= require 'masonry/transitions'
-
-#masonry-container {
-  background: #FFF;
-  padding: 5px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  clear: both;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
-}
-
-.clearfix:before, .clearfix:after { content: ""; display: table; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
-
-
-.col1 { width: 80px; }
-.col2 { width: 180px; }
-.col1 img { max-width: 80px; }
-.col2 img { max-width: 180px; }
-
 /*
 * Author: Åukasz Holeczek
 * Template: Tabula Bootstrap Theme
@@ -446,9 +416,9 @@ header {
     color: #a3a3a3;
     border: none;
     border-left: 1px solid #bfbfbf;
-    -webkit-border-radius: 0px;
+/*    -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 0px;
+    border-radius: 0px;*/
     padding: 19px 15px 18px 15px;
     margin-top: 0px;
     margin-right: 0px;
@@ -534,16 +504,16 @@ header {
 #portfolio .item {
     border: 1px solid #fafafa;
     border-top: 2px solid #fafafa;
-/*    background: #f6f6f6;*/ /* Old browsers */
+    background: #f6f6f6; /* Old browsers */
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-/*    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYWVhZWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);*/
-/*    background: -moz-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%);*/ /* FF3.6+ */
-/*    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f6f6), color-stop(100%, #eaeaea));*/ /* Chrome,Safari4+ */
-/*    background: -webkit-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%);*/ /* Chrome10+,Safari5.1+ */
-/*    background: -o-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%); *//* Opera 11.10+ */
-/*    background: -ms-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%);*/ /* IE10+ */
-    background: linear-gradient(to bottom, #f6f6f6 0%, #eaeaea 100%); /* W3C */
-/*    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#eaeaea', GradientType=0 );*/ /* IE6-8 */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYWVhZWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f6f6), color-stop(100%, #eaeaea)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%); */ Opera 11.10+ 
+    background: -ms-linear-gradient(top, #f6f6f6 0%, #eaeaea 100%);  IE10+ 
+    background: linear-gradient(to bottom, #f6f6f6 0%, #eaeaea 100%);  W3C 
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#eaeaea', GradientType=0 ); /* IE6-8 */
     padding: 10px;
     text-shadow: 0px 1px 0px #fff;
     -webkit-border-radius: 4px;
@@ -553,11 +523,16 @@ header {
     -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, .15), 0px 2px 1px rgba(0, 0, 0, .10), 0px 3px 1px rgba(0, 0, 0, .05);
     box-shadow: 0px 1px 1px rgba(0, 0, 0, .15), 0px 2px 1px rgba(0, 0, 0, .10), 0px 3px 1px rgba(0, 0, 0, .05);
     margin-bottom: 10px;
+    -webkit-margin-bottom-collapse: separate;
 }
 
 #wall .item {
     margin: 0px;
     margin-bottom: 30px;
+}
+
+#wall .item {
+    margin-right: 20px;
 }
 
 #wall .item .meta {
@@ -2694,8 +2669,8 @@ a.buy:hover {
 /*    -webkit-transition-duration: 0.8s;
     -moz-transition-duration: 0.8s;
     -ms-transition-duration: 0.8s;
-    -o-transition-duration: 0.8s;*/
-    transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;*/
 }
 
 .isotope {

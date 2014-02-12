@@ -18,7 +18,6 @@ gem 'haml'
 gem 'nokogiri', '~> 1.5.0'
 gem 'open_uri_redirections'
 gem 'kaminari'
-gem 'masonry-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

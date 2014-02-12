@@ -20,11 +20,15 @@ module VideoParser
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
       @data = ActiveSupport::JSON.decode(response.body)["response"][1]
-      title = @data["title"].to_s
-      description = @data["description"].to_s
-      player = @data["player"].to_s
-      image_url = @data["image_medium"]
-      data = { :title => title, :description => description, :player => player, :image_url => image_url }
+      if @data.nil?
+        data = { :error => true }
+      else
+        title = @data["title"].to_s
+        description = @data["description"].to_s
+        player = @data["player"].to_s
+        image_url = @data["image_medium"]
+        data = { :title => title, :description => description, :player => player, :image_url => image_url }
+      end
     end
   end
 end
