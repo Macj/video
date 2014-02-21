@@ -8,7 +8,11 @@ module VideoParser
   class Vk
     def self.get_link url, token
       if url.match(/z=video/)
-        video_code = url[/z=video(.*?)%/,1]
+        if url.match(/%/)
+          video_code = url[/z=video(.*?)(%)?/,1]
+        else
+          video_code = url.slice(/-\d+_\d+/)
+        end
       else
         video_code = url.slice(/([\d|_]*)$/)
       end

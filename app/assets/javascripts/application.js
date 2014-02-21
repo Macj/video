@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery-1.8.2
+//= require jquery_ujs
 //= require imagesloaded.pkgd.min
 //= require bootstrap
 //= require masonry.pkgd.min

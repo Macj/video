@@ -41,10 +41,17 @@ class VideoFilesController < ApplicationController
 
   def create
     @video_file = VideoFile.new(video_file_params)
+    @data = check_url_availability(@video_file)
+    puts "DATA", @data
+    @error = @data[:error] if @data
 
     if @video_file.vk? and current_user.provider != "vkontakte"
         flash.now[:error] = "Вы должны авторизоваться Вконтакте."
         redirect_to sign_in_path
+    elsif @error == true
+      puts "ERROR", @error
+      flash.now[:error] = "Вы загрузили неверную ссылку. Попробуйте ещё раз."
+      render :new
     elsif @video_file.save and @video_file.valid?
       flash.now[:notice] = "Видео успешно загрузилось."
       redirect_to edit_video_file_path(@video_file)
@@ -56,7 +63,7 @@ class VideoFilesController < ApplicationController
 
   def edit
     data = VideoParser.parse_video_params(@video_file.url, session[:vk_token])
-    if data[:error] == true
+    if data.nil? or data[:error] == true
       @video_file.destroy
       flash.now[:error] = "Вы загрузили неверную ссылку. Попробуйте еще раз."
       render :new
@@ -70,6 +77,7 @@ class VideoFilesController < ApplicationController
       else
         @video_file.update_attributes(:title => @title, :description => @description)
       end
+      flash.now[:notice] = "Видео было загружено."
     end
   end
 
@@ -80,6 +88,35 @@ class VideoFilesController < ApplicationController
     else
       flash.now[:error] = "Видео не было сохранено. Попробуйте ещё раз."
       render :edit
+    end
+  end
+
+  def check_url_availability video_file
+    uri = URI.parse(video_file.url)
+    # if video_file.vk?
+    #   if !uri.path.scan(/video\d{7}_\d{8}/)
+    #     data = { :error => true }
+    #   elsif !uri.path.scan(/video\d{7}_\d{7}/)
+    #     data = { :error => true }
+    #   elsif !uri.path.scan(/video\d{8}_\d{9}/)
+    #     data = { :error => true }
+    #   elsif !uri.path.scan(/video\d{6}_\d{9}/)
+    #     data = { :error => true }
+    #   elsif !uri.path.scan(/\/\w+\?z=video-\d+_\d+%\w+/)
+    #     puts "GROUP NOT SCAN"
+    #     data = { :error => true }
+    #   else
+    #     data = { :error => false }
+    #   end
+    if video_file.youtube?
+      if uri.path.scan(/\/watch?v=\w{11}/) == []
+        data = { :error => true }
+      end
+    elsif video_file.vimeo?
+      if uri.path.scan(/\/\d{8}/) == []
+        data = { :error => true }
+      end
+    else
     end
   end
 
